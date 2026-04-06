@@ -16,5 +16,5 @@ Diferente das versões mais recentes, esta versão **v2.0** é um executável na
 
 ### 📺 Assista ao Tutorial:
 Aprenda a fazer modelagem de dados na prática usando esta ferramenta:
-👉 https://www.youtube.com/watch?v=leFcb7tgrpQ
+  👉 https://www.youtube.com/watch?v=leFcb7tgrpQ
 
