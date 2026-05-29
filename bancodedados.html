@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Apostila Interativa — Banco de Dados</title>
+<style>
+:root{
+  --primary:#1967d2;--dark:#114b9e;--bg:#edf3fb;--panel:#fff;--line:#d6e0ee;--text:#132033;--muted:#607089;
+  --danger:#ef4444;--success:#10b981;--warning:#f59e0b;--purple:#7c3aed;--code:#0f172a;
+  --shadow:0 6px 18px rgba(15,23,42,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{min-height:58px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 18px;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.header-left{display:flex;align-items:center;gap:14px;min-width:0}.btn-voltar{display:inline-flex;align-items:center;text-decoration:none;background:#0f3f86;color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:900;white-space:nowrap;transition:.18s}.btn-voltar:hover{background:#0b3270}header h1{font-size:18px;font-weight:900;letter-spacing:-.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand{font-size:13px;font-weight:800;white-space:nowrap}
+.app{display:grid;grid-template-columns:250px 1fr;min-height:calc(100vh - 58px)}
+nav{background:#fff;border-right:1px solid var(--line);padding:14px 10px;overflow:auto}nav h3{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:6px 8px 12px}.nav-link{display:block;width:100%;border:0;background:transparent;text-align:left;color:#0f172a;font-family:inherit;font-size:13px;font-weight:800;padding:10px 10px;border-radius:9px;margin-bottom:5px;cursor:pointer}.nav-link:hover{background:#eaf2ff;color:var(--primary)}.nav-link.active{background:var(--primary);color:#fff;box-shadow:0 2px 7px rgba(25,103,210,.35)}
+main{padding:18px;overflow:auto}.module{display:none}.module.active{display:block}.hero{background:linear-gradient(135deg,#eaf2ff,#ffffff);border:1px solid #bfdbfe;border-radius:18px;padding:26px;margin-bottom:16px;box-shadow:var(--shadow)}.kicker{display:inline-block;background:#dbeafe;color:#0f3f86;border:1px solid #bfdbfe;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}.hero h2{font-size:clamp(28px,3.2vw,42px);line-height:1.08;color:var(--dark);margin-bottom:10px}.hero p{line-height:1.65;max-width:1050px;font-size:16px}
+.chapter{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:24px;line-height:1.68}.chapter h2{font-size:25px;color:#0f3f86;margin:32px 0 10px;letter-spacing:-.2px}.chapter h2:first-child{margin-top:0}.chapter h3{color:var(--dark);font-size:19px;margin:20px 0 8px}.chapter p{margin:10px 0}.chapter ul,.chapter ol{margin:10px 0 10px 26px}.chapter li{margin:5px 0}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:15px 0}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:15px 0}.card{background:#fff;border:1px solid var(--line);border-radius:13px;box-shadow:0 4px 14px rgba(15,23,42,.08);overflow:hidden}.card-body{padding:15px;line-height:1.55}.card h3{color:var(--dark);margin:0 0 8px}.problem{border-left:5px solid var(--danger);background:#fff1f2}.solution{border-left:5px solid var(--success);background:#ecfdf5}.note{border-left:5px solid var(--warning);background:#fff7d6}.idea{border-left:5px solid var(--purple);background:#f5f3ff}.visual{border:1px solid var(--line);background:#f8fbff;border-radius:13px;padding:16px;margin:14px 0;overflow:auto}.flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px}.node{background:#fff;border:2px solid var(--primary);color:var(--dark);border-radius:12px;padding:12px 16px;font-weight:900;text-align:center;min-width:110px}.arrow{font-size:24px;font-weight:900;color:#334155}pre{background:var(--code);color:#f8fafc;border-radius:10px;padding:14px;margin:12px 0;white-space:pre-wrap;overflow:auto;font-family:Consolas,"Courier New",monospace;font-size:13.5px;line-height:1.5}.sql-table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px;background:#fff}.sql-table th{background:#eaf2ff;color:#114b9e}.sql-table th,.sql-table td{border:1px solid #d6e0ee;padding:8px;text-align:left}.tag{display:inline-block;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:900;margin:2px 4px 2px 0;background:#e0f2fe;color:#075985;border:1px solid #bae6fd}.timeline{display:grid;gap:10px;margin:14px 0}.timeline-item{background:#fff;border:1px solid var(--line);border-left:5px solid var(--primary);border-radius:12px;padding:14px;box-shadow:0 3px 10px rgba(15,23,42,.06)}.placeholder .chapter{min-height:260px}
+@media(max-width:1050px){.app{grid-template-columns:1fr}nav{position:sticky;top:0;z-index:10;display:flex;gap:6px;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line)}nav h3{display:none}.nav-link{min-width:max-content}.grid,.grid2{grid-template-columns:1fr}}
+@media(max-width:720px){header{align-items:flex-start;flex-direction:column}.header-left{flex-wrap:wrap}header h1{font-size:16px;white-space:normal}.brand{font-size:12px}main{padding:12px}.chapter{padding:16px}}
+</style>
+</head>
+<body>
+<header><div class="header-left"><a href="index.html" class="btn-voltar">← Mundo bit Byte</a><h1>Apostila Interativa — Banco de Dados</h1></div><div class="brand">Professor Ronaldo Lavestein</div></header>
+<div class="app"><nav><h3>Módulos</h3>
+<button class="nav-link" id="btn-inicio" data-target="inicio">Início</button>
+<button class="nav-link" id="btn-fundamentos" data-target="fundamentos">1 Fundamentos</button>
+<button class="nav-link" id="btn-modelagem" data-target="modelagem">2 Modelagem</button>
+<button class="nav-link" id="btn-normalizacao" data-target="normalizacao">3 Normalização</button>
+<button class="nav-link" id="btn-sql" data-target="sql">4 SQL com MySQL</button>
+<button class="nav-link" id="btn-joins" data-target="joins">5 Relacionamentos e JOIN</button>
+<button class="nav-link" id="btn-sgbd" data-target="sgbd">6 Administração e SGBD</button>
+<button class="nav-link" id="btn-transacoes" data-target="transacoes">7 Transações e ACID</button>
+<button class="nav-link" id="btn-avancado" data-target="avancado">8 SQL Avançado</button>
+<button class="nav-link" id="btn-projetos" data-target="projetos">9 Projeto Integrador</button>
+<button class="nav-link" id="btn-moderna" data-target="moderna">10 Visão Moderna</button>
+<button class="nav-link" id="btn-exercicios" data-target="exercicios">99 Exercícios</button>
+</nav><main>
+<section class="module" id="mod-inicio">
+<section class="hero"><span class="kicker">Capítulo 1</span><h2>História dos Bancos de Dados</h2><p>Muito antes do SQL existir, escolas, bancos, hospitais, governos e empresas já enfrentavam o mesmo desafio: guardar informações de forma confiável, encontrá-las rapidamente e evitar erros. Este capítulo mostra por que os bancos de dados surgiram, quais problemas eles resolveram e como essa evolução preparou o caminho para a modelagem, o SQL e os SGBDs modernos.</p></section>
+<article class="chapter">
+<h2>1. Introdução — o mundo moderno funciona sobre dados</h2>
+<p>Neste exato momento, enquanto você lê este material, bancos estão processando transferências PIX, hospitais estão acessando exames de pacientes, aplicativos estão calculando rotas, redes sociais estão armazenando mensagens, lojas virtuais estão registrando pedidos e escolas estão controlando frequência e notas.</p>
+<p>Tudo isso depende de algo fundamental: <strong>informações organizadas</strong>. Hoje estamos tão acostumados com sistemas digitais que parece natural encontrar qualquer informação em segundos. Mas durante grande parte da história humana isso era extremamente difícil.</p>
+<p>E quanto mais a sociedade crescia, mais informações eram produzidas, mais registros precisavam ser controlados e mais complexa se tornava a administração dos dados. Os bancos de dados surgiram justamente para resolver esse problema.</p>
+<div class="grid2"><section class="card idea"><div class="card-body"><h3>Ideia principal</h3><p>Banco de dados não é apenas armazenamento. Banco de dados é organização inteligente da informação.</p></div></section><section class="card note"><div class="card-body"><h3>Antes dos comandos</h3><p>Antes de aprender SQL, tabelas, JOIN e normalização, é preciso entender por que essas ferramentas precisaram existir.</p></div></section></div>
+<h2>2. O problema da organização das informações</h2>
+<p>Imagine uma escola antes da informática. Tudo precisava ser controlado manualmente: matrículas, boletins, frequência, histórico escolar, biblioteca, pagamentos e documentos dos alunos.</p>
+<p>As informações eram armazenadas em livros, fichários, pastas, armários e arquivos físicos. Em uma instituição com centenas, milhares ou dezenas de milhares de alunos, administrar tudo isso manualmente se tornava extremamente difícil.</p>
+<div class="grid"><section class="card problem"><div class="card-body"><h3>Perda de informações</h3><p>Documentos podiam rasgar, molhar, deteriorar, ser arquivados incorretamente ou desaparecer.</p></div></section><section class="card problem"><div class="card-body"><h3>Informações inconsistentes</h3><p>O endereço de um aluno podia ser atualizado na secretaria, mas continuar antigo no financeiro.</p></div></section><section class="card problem"><div class="card-body"><h3>Dificuldade de busca</h3><p>Procurar notas, pagamentos atrasados ou livros emprestados podia levar horas, dias ou semanas.</p></div></section></div>
+<h3>Repetição de informações</h3><p>O nome de um mesmo aluno precisava aparecer na matrícula, no boletim, na biblioteca, no financeiro e no histórico escolar. Isso gerava <strong>redundância</strong>, isto é, repetição desnecessária de dados. E redundância aumenta erros, inconsistências, retrabalho e dificuldade de manutenção.</p>
+<div class="card solution"><div class="card-body"><h3>Solução buscada</h3><p>Os bancos de dados foram criados para organizar informações, reduzir redundância, evitar inconsistências, facilitar consultas, proteger dados, permitir relacionamentos e melhorar a confiabilidade.</p></div></div>
+<h3>Analogia importante</h3><p>Imagine uma biblioteca gigantesca sem categorias, códigos, índices ou prateleiras organizadas. Mesmo existindo milhares de livros importantes, encontrar uma informação se torna extremamente difícil. Os bancos de dados nasceram exatamente para evitar esse tipo de caos informacional.</p>
+<h2>3. O crescimento da sociedade e o aumento dos dados</h2>
+<p>Durante muito tempo, a quantidade de informações produzidas era relativamente pequena. Mas isso começou a mudar com crescimento populacional, industrialização, expansão das empresas, crescimento dos governos, avanço das telecomunicações e aumento das operações bancárias.</p>
+<p>A sociedade começou a gerar dados em escala cada vez maior. Controlar manualmente todas as movimentações bancárias de um país, todos os exames de um hospital, todas as mensagens de uma rede social ou todas as vendas de um grande e-commerce seria praticamente impossível.</p>
+<h2>4. A chegada dos computadores</h2>
+<p>Conforme as empresas e instituições cresceram, os computadores começaram a ganhar importância. A ideia parecia revolucionária: armazenar informações digitalmente. Agora os dados poderiam ocupar menos espaço físico, ser copiados, pesquisados e processados mais rapidamente.</p>
+<p>Na época, parecia que os computadores resolveriam todos os problemas administrativos. Mas existia um ponto importante: os primeiros sistemas ainda não possuíam bancos de dados modernos.</p>
+<h2>5. Os primeiros sistemas computacionais</h2>
+<p>Nos primeiros sistemas computacionais, cada programa armazenava suas informações em arquivos próprios.</p>
+<pre>Sistema financeiro  → financeiro.dat
+Sistema acadêmico   → alunos.dat
+Biblioteca          → livros.dat
+Recursos humanos    → funcionarios.dat</pre>
+<div class="card note"><div class="card-body"><h3>Ideia principal</h3><p>Os computadores resolveram parte do problema físico do armazenamento, mas apenas trocar papel por arquivos digitais não resolvia os problemas estruturais da organização dos dados.</p></div></div>
+<h2>6. Sistemas baseados em arquivos</h2>
+<p>Esse modelo ficou conhecido como sistema baseado em arquivos. Nele, cada programa possuía seus próprios dados, cada sistema controlava seus próprios arquivos e não existia gerenciamento centralizado das informações.</p>
+<div class="visual"><pre>Sistema Financeiro
+        │
+        └── financeiro.dat
+
+Sistema Acadêmico
+        │
+        └── alunos.dat
+
+Biblioteca
+        │
+        └── livros.dat</pre></div>
+<p>Os sistemas funcionavam praticamente isolados.</p>
+<h2>7. O grande problema dos arquivos isolados</h2>
+<h3>7.1 Redundância de dados</h3><p>A mesma informação precisava ser armazenada várias vezes. Se o telefone de um cliente fosse atualizado em apenas um sistema, um setor teria o telefone novo e outro ainda teria o antigo.</p>
+<h3>7.2 Inconsistência de dados</h3><p>Esse é um dos problemas mais perigosos dos sistemas antigos.</p><pre>Financeiro: Rua das Flores, 100
+Biblioteca: Rua das Flores, 180</pre><p>Agora existem dois endereços diferentes para a mesma pessoa. Qual deles é verdadeiro?</p>
+<h3>7.3 Isolamento de informações</h3><p>O sistema financeiro não compartilhava informações naturalmente com biblioteca, secretaria, recursos humanos ou estoque. Gerar relatórios integrados era extremamente difícil.</p>
+<pre>“Mostrar todos os alunos inadimplentes
+que ainda possuem livros emprestados.”</pre>
+<h3>7.4 Dependência entre programa e arquivo</h3><p>Os programas conheciam exatamente o formato dos arquivos. Se a empresa desejasse adicionar um campo como <strong>email</strong>, o formato do arquivo mudava e frequentemente o programa precisava ser alterado também.</p>
+<h3>7.5 Segurança limitada</h3><p>Cada programa implementava segurança da sua própria maneira. Não existia gerenciamento centralizado, controle integrado de usuários nem política unificada de acesso.</p>
+<div class="grid2"><section class="card problem"><div class="card-body"><h3>Sistema manual</h3><ul><li>lento;</li><li>físico;</li><li>difícil de consultar.</li></ul></div></section><section class="card problem"><div class="card-body"><h3>Sistema baseado em arquivos</h3><ul><li>digital;</li><li>mais rápido;</li><li>porém estruturalmente desorganizado.</li></ul></div></section></div>
+<h2>8. A necessidade de um novo modelo</h2><p>Os dados existiam, mas estavam espalhados, repetidos, inconsistentes, isolados e difíceis de integrar. A sociedade precisava de algo capaz de centralizar, organizar, relacionar e proteger informações.</p>
+<h2>9. O surgimento dos SGBDs</h2><p>Esses sistemas especializados ficaram conhecidos como <strong>SGBD — Sistema Gerenciador de Banco de Dados</strong>, ou <strong>DBMS — Database Management System</strong>. O SGBD representou uma mudança gigantesca: antes cada programa controlava seus próprios arquivos; agora os dados passaram a ser administrados por um sistema especializado.</p>
+<div class="visual"><div class="flow"><div class="node">Programa</div><div class="arrow">→</div><div class="node">SGBD</div><div class="arrow">→</div><div class="node">Banco de Dados</div></div></div>
+<p>O SGBD passou a armazenar dados, organizar informações, controlar acessos, evitar inconsistências, permitir consultas, proteger integridade, gerenciar concorrência e recuperar falhas.</p>
+<h2>10. A grande revolução: o modelo relacional</h2><p>Mesmo com os SGBDs, ainda existia uma pergunta importante: qual a melhor maneira de organizar os dados? Diversos modelos surgiram, como o hierárquico, em rede e relacional.</p>
+<h3>10.1 Modelo hierárquico</h3><p>No modelo hierárquico, os dados eram organizados como uma árvore: um elemento pai e vários elementos filhos.</p><pre>Empresa
+ ├── Departamento Financeiro
+ │      ├── Funcionário A
+ │      └── Funcionário B
+ └── Departamento TI
+        └── Funcionário C</pre><p>Ele funcionava bem para estruturas rígidas, mas tinha dificuldade para representar relações complexas e conexões flexíveis.</p>
+<h3>10.2 Modelo em rede</h3><p>O modelo em rede permitia relações mais complexas entre registros. Trouxe mais flexibilidade, mas também aumentou a complexidade de implementação e manutenção.</p>
+<h3>10.3 Modelo relacional</h3><p>Na década de 1970, Edgar Frank Codd propôs uma ideia revolucionária: organizar os dados em tabelas relacionadas. Essa proposta mudou a história da computação.</p>
+<table class="sql-table"><tr><th>id_aluno</th><th>nome</th><th>id_turma</th></tr><tr><td>1</td><td>Ana</td><td>10</td></tr><tr><td>2</td><td>Bruno</td><td>20</td></tr></table>
+<table class="sql-table"><tr><th>id_turma</th><th>nome_turma</th></tr><tr><td>10</td><td>1A</td></tr><tr><td>20</td><td>1B</td></tr></table>
+<div class="card idea"><div class="card-body"><h3>Ideia principal</h3><p>O modelo relacional transformou dados em relações organizadas. Essas relações podiam ser consultadas, filtradas, combinadas e relacionadas.</p></div></div>
+<h2>11. O poder dos relacionamentos</h2><p>A verdadeira força do modelo relacional não está apenas nas tabelas. Está nos relacionamentos entre elas.</p><div class="visual"><pre>TURMAS
+ id_turma (PK)
+       ▲
+       │
+ALUNOS
+ id_turma (FK)</pre></div><p>Quando um aplicativo mostra cliente, pedido, produto e pagamento, ele está relacionando várias tabelas ao mesmo tempo.</p>
+<h2>12. O surgimento do SQL</h2><p>Com o crescimento dos bancos relacionais surgiu a necessidade de uma linguagem padronizada. Essa linguagem ficou conhecida como <strong>SQL — Structured Query Language</strong>.</p><pre>SELECT nome
+FROM alunos
+WHERE turma = '1A';</pre><p>Esse comando busca os nomes dos alunos da turma 1A. O SQL é uma linguagem declarativa: normalmente dizemos o que queremos, e o SGBD decide como executar.</p>
+<div class="card note"><div class="card-body"><h3>Analogia</h3><p>Quando você pede “uma pizza de calabresa”, não precisa explicar como preparar a massa, o molho e o forno. Você declara o resultado desejado. O SQL funciona de forma parecida.</p></div></div>
+<h2>13. O modelo relacional mudou o mundo</h2><p>O modelo relacional trouxe simplicidade, organização, integridade, flexibilidade e padronização. Isso permitiu a criação de bancos, redes sociais, hospitais, ERPs, e-commerce, sistemas acadêmicos e aplicativos.</p>
+<div class="grid"><section class="card solution"><div class="card-body"><h3>Banco de Dados</h3><p>Conjunto organizado de dados.</p></div></section><section class="card solution"><div class="card-body"><h3>SGBD</h3><p>Sistema que gerencia os dados.</p></div></section><section class="card solution"><div class="card-body"><h3>SQL</h3><p>Linguagem utilizada para manipular e consultar os dados.</p></div></section></div>
+<h2>14. A explosão dos dados e o mundo moderno</h2><p>Depois que os bancos relacionais se consolidaram, o mundo mudou novamente. A sociedade passou a produzir dados em escala gigantesca por causa de computadores pessoais, internet, smartphones, redes sociais, serviços digitais, comércio eletrônico, sensores, streaming e GPS.</p>
+<h2>15. A internet mudou as regras do jogo</h2><p>Antes da internet, muitos sistemas funcionavam localmente. Mas a internet trouxe milhões de usuários simultâneos. Agora os bancos de dados precisavam responder rapidamente, funcionar 24 horas, suportar milhares de acessos, manter integridade e processar operações em tempo real.</p>
+<div class="card problem"><div class="card-body"><h3>Problema real</h3><p>Em uma Black Friday, milhares de pessoas acessam produtos, realizam pagamentos, alteram carrinhos, atualizam estoques e finalizam pedidos ao mesmo tempo.</p></div></div>
+<h2>16. O crescimento dos bancos relacionais</h2><p>Os bancos relacionais continuaram evoluindo. SGBDs como Oracle, PostgreSQL, MySQL e SQL Server passaram a oferecer transações, recuperação de falhas, gerenciamento multiusuário, segurança avançada, controle de permissões e otimização de consultas.</p>
+<h2>17. Big Data — quando os dados explodiram</h2><p>Com a internet, surgiu um novo desafio: quantidade absurda de dados. Big Data não significa apenas “muitos dados”; envolve escala, velocidade, variedade, complexidade e geração contínua de informações.</p>
+<div class="grid"><section class="card note"><div class="card-body"><h3>Volume</h3><p>Quantidade gigantesca de dados.</p></div></section><section class="card note"><div class="card-body"><h3>Velocidade</h3><p>Dados sendo produzidos continuamente.</p></div></section><section class="card note"><div class="card-body"><h3>Variedade</h3><p>Textos, imagens, vídeos, localização, áudio e sensores.</p></div></section><section class="card note"><div class="card-body"><h3>Veracidade</h3><p>Necessidade de confiabilidade.</p></div></section><section class="card note"><div class="card-body"><h3>Valor</h3><p>Capacidade de transformar dados em conhecimento útil.</p></div></section></div>
+<h2>18. O surgimento do NoSQL</h2><p>Alguns problemas modernos começaram a exigir mais flexibilidade, escalabilidade extrema, armazenamento distribuído e velocidade em cenários específicos. Foi nesse contexto que surgiram os bancos NoSQL, expressão geralmente entendida como <strong>Not Only SQL</strong>: “não apenas SQL”.</p>
+<div class="grid2"><section class="card solution"><div class="card-body"><h3>Relacional</h3><ul><li>tabelas;</li><li>integridade forte;</li><li>estrutura rígida;</li><li>excelente consistência.</li></ul><p>Ideal para financeiro, ERP, controle acadêmico, estoque e bancos.</p></div></section><section class="card solution"><div class="card-body"><h3>NoSQL</h3><ul><li>maior flexibilidade;</li><li>escalabilidade;</li><li>estruturas menos rígidas.</li></ul><p>Muito usado em redes sociais, cache, logs, recomendações e mensageria.</p></div></section></div>
+<h3>Tipos de bancos NoSQL</h3><p><span class="tag">Documento</span> MongoDB &nbsp; <span class="tag">Chave-valor</span> Redis &nbsp; <span class="tag">Grafos</span> Neo4j &nbsp; <span class="tag">Colunar</span> Cassandra</p>
+<h2>19. Cloud Computing — bancos na nuvem</h2><p>Outro avanço revolucionário foi a computação em nuvem. Antes, os bancos normalmente ficavam em servidores locais. Agora eles podem funcionar pela internet, com escalabilidade, acesso remoto, alta disponibilidade, backups automatizados e elasticidade.</p>
+<p>Exemplos modernos incluem Amazon RDS, Google Cloud SQL, Azure SQL, Firebase e Supabase.</p>
+<h2>20. Bancos de dados e Inteligência Artificial</h2><p>A Inteligência Artificial moderna depende profundamente de dados organizados. Sem dados, não existe IA útil.</p><p>Um sistema de recomendação da Netflix, por exemplo, analisa filmes assistidos, tempo de visualização, avaliações, preferências e histórico do usuário. Tudo isso depende de bancos de dados.</p>
+<h2>21. O mundo atual funciona sobre dados</h2><p>Hoje praticamente toda área depende de bancos de dados: educação, medicina, bancos, logística, indústria, agronegócio, comércio, segurança, redes sociais e aplicativos.</p>
+<div class="visual"><pre>Sistemas manuais
+        ↓
+Arquivos digitais
+        ↓
+SGBDs
+        ↓
+Modelo Relacional
+        ↓
+SQL
+        ↓
+Internet
+        ↓
+Big Data
+        ↓
+NoSQL
+        ↓
+Cloud Computing
+        ↓
+Inteligência Artificial</pre></div>
+<h2>22. Resumo inteligente do capítulo</h2><p>Neste capítulo aprendemos por que os bancos de dados surgiram, os problemas dos sistemas manuais, as limitações dos sistemas baseados em arquivos, como nasceram os SGBDs, como o modelo relacional revolucionou a computação, como surgiu o SQL e como os bancos evoluíram para Big Data, NoSQL, cloud e IA.</p><p>Mais importante: aprendemos que banco de dados não é apenas tecnologia. Banco de dados é organização inteligente da informação em escala global.</p>
+<h2>23. Exercícios diretos</h2><ol><li>Explique o principal problema dos sistemas baseados em arquivos.</li><li>O que é redundância de dados?</li><li>O que é inconsistência?</li><li>Qual foi a principal contribuição do modelo relacional?</li><li>Qual a função de um SGBD?</li><li>Explique resumidamente a diferença entre banco relacional e banco NoSQL.</li></ol>
+<h2>24. Perguntas reflexivas</h2><ol><li>Por que a sociedade moderna depende tanto de bancos de dados?</li><li>Quais problemas poderiam acontecer se bancos não garantissem integridade?</li><li>Por que apenas armazenar dados não é suficiente?</li><li>Por que bancos relacionais continuam importantes mesmo com NoSQL?</li></ol>
+<h2>25. Desafio final do capítulo</h2><div class="card idea"><div class="card-body"><h3>Rede social moderna</h3><p>Explique quais tipos de dados uma rede social precisa armazenar, quais desafios de volume ela enfrenta, por que precisa de bancos rápidos e organizados, onde bancos relacionais podem ser úteis e onde bancos NoSQL podem ser úteis.</p></div></div>
+<h2>26. Fechamento do capítulo</h2><p>Neste capítulo você não aprendeu apenas “história”. Você começou a entender por que bancos de dados existem, quais problemas eles resolvem e por que se tornaram uma das tecnologias mais importantes da computação moderna.</p><p>Agora estamos prontos para estudar tabelas, registros, campos, chaves, integridade e estrutura relacional: os fundamentos internos dos bancos de dados modernos.</p>
+</article></section>
+<section class="module placeholder" id="mod-fundamentos"><section class="hero"><span class="kicker">Capítulo 2</span><h2>Fundamentos de Banco de Dados</h2><p>Este capítulo será desenvolvido após a validação do Capítulo 1.</p></section><article class="chapter"><h2>Conteúdo em construção</h2><p>Entrarão aqui: dado, informação, tabela, registro, campo, chave e integridade.</p></article></section>
+<section class="module placeholder" id="mod-modelagem"><section class="hero"><span class="kicker">Capítulo 3</span><h2>Modelagem Conceitual</h2><p>Entidades, atributos, relacionamentos, cardinalidade, DER e MER.</p></section><article class="chapter"><h2>Conteúdo em construção</h2></article></section>
+<section class="module placeholder" id="mod-normalizacao"><section class="hero"><span class="kicker">Capítulo 4</span><h2>Normalização</h2><p>Anomalias, 1FN, 2FN, 3FN e desnormalização.</p></section><article class="chapter"><h2>Conteúdo em construção</h2></article></section>
+<section class="module placeholder" id="mod-sql"><section class="hero"><span class="kicker">Capítulo 5</span><h2>SQL com MySQL</h2><p>DDL, DML e DQL.</p></section><article class="chapter"><h2>Conteúdo em construção</h2></article></section>
+<section class="module placeholder" id="mod-joins"><section class="hero"><span class="kicker">Capítulo 6</span><h2>Relacionamentos e JOIN</h2><p>INNER, LEFT, RIGHT, UNION e leitura visual de junções.</p></section><article class="chapter"><h2>Conteúdo em construção</h2></article></section>
+<section class="module placeholder" id="mod-sgbd"><section class="hero"><span class="kicker">Capítulo 7</span><h2>Administração e SGBD</h2><p>Instalação, operação, usuários, permissões, backup e ferramentas.</p></section><article class="chapter"><h2>Conteúdo em construção</h2></article></section>
+<section class="module placeholder" id="mod-transacoes"><section class="hero"><span class="kicker">Capítulo 8</span><h2>Transações e ACID</h2><p>Atomicidade, consistência, isolamento, durabilidade e concorrência.</p></section><article class="chapter"><h2>Conteúdo em construção</h2></article></section>
+<section class="module placeholder" id="mod-avancado"><section class="hero"><span class="kicker">Capítulo 9</span><h2>SQL Avançado</h2><p>Views, índices, triggers, procedures, functions e performance.</p></section><article class="chapter"><h2>Conteúdo em construção</h2></article></section>
+<section class="module placeholder" id="mod-projetos"><section class="hero"><span class="kicker">Capítulo 10</span><h2>Projeto Integrador</h2><p>Modelagem, normalização, implementação, consultas e conexão com aplicações.</p></section><article class="chapter"><h2>Conteúdo em construção</h2></article></section>
+<section class="module placeholder" id="mod-moderna"><section class="hero"><span class="kicker">Capítulo 11</span><h2>Visão Moderna</h2><p>NoSQL, cloud, APIs, Big Data e IA.</p></section><article class="chapter"><h2>Conteúdo em construção</h2></article></section>
+<section class="module placeholder" id="mod-exercicios"><section class="hero"><span class="kicker">Capítulo 99</span><h2>Exercícios</h2><p>Atividades organizadas por tema e dificuldade.</p></section><article class="chapter"><h2>Conteúdo em construção</h2></article></section>
+</main></div><script>
+function showModule(id){document.querySelectorAll('.module').forEach(m=>m.classList.remove('active'));document.querySelectorAll('.nav-link').forEach(b=>b.classList.remove('active'));const mod=document.getElementById('mod-'+id);const btn=document.getElementById('btn-'+id);if(mod&&btn){mod.classList.add('active');btn.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}}
+document.querySelectorAll('.nav-link[data-target]').forEach(btn=>btn.addEventListener('click',()=>showModule(btn.dataset.target)));
+showModule('inicio');
+</script></body></html>
